@@ -1,17 +1,38 @@
-var app = require('express')(), 
+var express = require('express'),
+  app = express(), 
   server = require('http').createServer(app);
 var HTTP_PORT  = 80;
 
 server.listen(HTTP_PORT);
 console.log('Express listening on ' + HTTP_PORT);
 
+
+app.use(express.static(__dirname + '/'));
+
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
+  res.sendfile( 'index.html');
+});
+
+var countUp = 0, countDown = 0;
+
+function resetCount() {
+  countUp = 0; countDown = 0;
+}
+
+app.post('/up', function(req, res) {
+  // var name = req.body.name,
+  //   color = req.body.color;
+  countUp++;
+  res.json({ "d": "OK" })
+});
+
+app.post('/down', function(req, res) {
+  countDown++;
+  res.json({ "d": "OK" });
 });
 
 
 var net = require('net');
-
 var HOST = '127.0.0.1';
 // var HOST = '198.199.113.97';
 var SOCKET_PORT = 8080;
@@ -34,7 +55,8 @@ net.createServer(function(sock) {
     });
     
     var intervalID = setInterval(function() {
-        sock.write('up');
+        sock.write( 'up:' + countUp +",down: " + countDown );
+        resetCount();
     }, INTERVAL);
 
     // Add a 'close' event handler to this instance of socket
