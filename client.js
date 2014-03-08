@@ -1,10 +1,7 @@
 var net = require('net');
 
-// var HOST = '127.0.0.1';
-// var HOST = 'bizi.kd.io';
-// var HOST = 'hacksc.herokuapp.com';
-var HOST = '198.199.113.97';
-// var PORT = 6969;
+var HOST = '127.0.0.1';
+// var HOST = '198.199.113.97';
 var PORT = 8080;
 
 var client = new net.Socket();
@@ -12,7 +9,7 @@ client.connect(PORT, HOST, function() {
 
     console.log('CONNECTED TO: ' + HOST + ':' + PORT);
     // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client 
-    client.write('I am Chuck Norris!');
+    client.write('Client connected!');
 
 });
 

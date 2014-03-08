@@ -1,47 +1,50 @@
 var app = require('express')(), 
   server = require('http').createServer(app);
-  // io = require('socket.io').listen(server);
+var HTTP_PORT  = 80;
 
-server.listen(80);
+server.listen(HTTP_PORT);
+console.log('Express listening on ' + HTTP_PORT);
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
-// io.sockets.on('connection', function (socket) {
-//   socket.emit('news', { hello: 'world' });
-//   socket.on('my other event', function (data) {
-//     console.log(data);
-//   });
-// });
-
 
 var net = require('net');
 
-// var HOST = '127.0.0.1';
-var HOST = '198.199.113.97';
-var PORT = 8080;
+var HOST = '127.0.0.1';
+// var HOST = '198.199.113.97';
+var SOCKET_PORT = 8080;
+var INTERVAL = 2000;
 
-var client = new net.Socket();
-client.connect(PORT, HOST, function() {
-
-    console.log('CONNECTED TO: ' + HOST + ':' + PORT);
-    // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client 
-    client.write('I am Chuck Norris!');
-
-});
-
-// Add a 'data' event handler for the client socket
-// data is what the server sent to this socket
-client.on('data', function(data) {
+// Create a server instance, and chain the listen function to it
+// The function passed to net.createServer() becomes the event handler for the 'connection' event
+// The sock object the callback function receives UNIQUE for each connection
+net.createServer(function(sock) {
     
-    console.log('DATA: ' + data);
-    // Close the client socket completely
-    // client.destroy();
+    // We have a connection - a socket object is assigned to the connection automatically
+    console.log('CONNECTED: ' + sock.remoteAddress +':'+ sock.remotePort);
     
-});
+    // Add a 'data' event handler to this instance of socket
+    sock.on('data', function(data) {
+        console.log('DATA ' + sock.remoteAddress + ': ' + data);
+        // Write the data back to the socket, the client will receive it as data from the server
+        sock.write('client said "' + data + '"');
+        
+    });
+    
+    var intervalID = setInterval(function() {
+        sock.write('up');
+    }, INTERVAL);
 
-// Add a 'close' event handler for the client socket
-client.on('close', function() {
-    console.log('Connection closed');
-});
+    // Add a 'close' event handler to this instance of socket
+    sock.on('close', function(data) {
+        console.log('CLOSED: ' + sock.remoteAddress +' '+ sock.remotePort);
+        if (intervalID) {
+          clearInterval(intervalID);
+        }
+    });
+    
+}).listen(SOCKET_PORT, HOST);
+
+console.log('Socket listening on ' + HOST +':'+ SOCKET_PORT);
