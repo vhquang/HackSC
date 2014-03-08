@@ -1,6 +1,8 @@
 var net = require('net');
 
-var HOST = '127.0.0.1';
+// var HOST = '127.0.0.1';
+// var HOST = 'bizi.kd.io';
+var HOST = 'hacksc.herokuapp.com';
 var PORT = 6969;
 
 var client = new net.Socket();
