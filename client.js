@@ -11,17 +11,19 @@ client.connect(PORT, HOST, function() {
     // Write a message to the socket as soon as the client is connected, the server will receive it as message from the client 
     client.write('Client connected!');
 
+    // Add a 'data' event handler for the client socket
+    // data is what the server sent to this socket
+    client.on('data', function(data) {
+        console.log('DATA: ' + data);
+        // Close the client socket completely
+        // client.destroy();
+    });
+
+    client.on('message', function(message) {
+        console.log(message);
+    });
 });
 
-// Add a 'data' event handler for the client socket
-// data is what the server sent to this socket
-client.on('data', function(data) {
-    
-    console.log('DATA: ' + data);
-    // Close the client socket completely
-    // client.destroy();
-    
-});
 
 // Add a 'close' event handler for the client socket
 client.on('close', function() {
