@@ -24,8 +24,8 @@ function resetCount() {
 }
 
 function countVote() {
-  // var m = parseInt( Math.random() * 4);
-  var m = 0;
+  var m = parseInt( Math.random() * 4);
+  // var m = 0;
   for (var i = 0; i < votes.length; i++) {
     if (votes[i] > votes[m]) {
       m = i;
