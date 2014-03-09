@@ -1,0 +1,41 @@
+<!--<div class="header">-->
+  <!--<ul class="nav nav-pills pull-right">-->
+    <!--<li class="active"><a ng-href="#">Home</a></li>-->
+    <!--<li><a ng-href="#">About</a></li>-->
+    <!--<li><a ng-href="#">Contact</a></li>-->
+  <!--</ul>-->
+  <!--<h3 class="text-muted">FappyBird</h3>-->
+<!--</div>-->
+
+<div class="">
+  <div style="width: 100%; padding: 20px" class="row">
+    <span class="counter" ng-class="{blue: available}" style="margin-left: 5%">
+      {{countDown}}
+    </span>
+  </div>
+  <!--<div style="width: 80%">-->
+    <!--<input type="text" placeholder="Name" class="main-input"/>-->
+    <!--<input type="text" placeholder="Catch Phrase" class="main-input"/>-->
+  <!--</div>-->
+
+  <div class="text-center choosing">
+    <span class="">Predict where the bird will fly and nail him!</span>
+  </div>
+
+  <!--<button>HELP</button>-->
+  <!--<button>HINDER</button>-->
+</div>
+
+<div class="game-panel">
+  <span class="pull-right" style="width: 80%;">
+    <button id="btn0" class="option-button" ng-disabled="!available" ng-click="post('0');">1</button>
+    <button id="btn1" class="option-button" ng-disabled="!available" ng-click="post('1');">2</button>
+    <button id="btn2" class="option-button" ng-disabled="!available" ng-click="post('2');">3</button>
+    <button id="btn3" class="option-button" ng-disabled="!available" ng-click="post('3');">4</button>
+  </span>
+  <img src="../images/bird-and-pipes.png" class="bird" alt=""/>
+</div>
+
+<div class="footer text-center" style="position: absolute; bottom: 0px; background-color: #5c4f04; width: 100%;">
+  <p>♥ from the POLY Founders</p>
+</div>
