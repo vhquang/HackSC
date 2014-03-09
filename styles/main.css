@@ -20,7 +20,7 @@
 
 .counter {
   width: 20%;
-  font-size: 110px;
+  font-size: 7em;
   color: grey;
   font-family: 'Press Start 2P', cursive;
 }
@@ -48,12 +48,16 @@
   line-height: 1.33;
   border-radius: 6px;
   width: 100%;
-  margin: 10px;
+  /*margin: 10px;*/
   background-color: aliceblue;
 }
 
 .blue {
   color: dodgerblue !important ;
+}
+
+.bomb {
+  background-image: url('../images/bomb.png');
 }
 
 

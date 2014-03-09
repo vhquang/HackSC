@@ -13,9 +13,10 @@ angular.module('fappyBirdApp')
       if (!birdHeight) { return; }
 
       birdHeight = birdHeight.replace("px", "");
-      var buttonSize = parseInt(birdHeight) / 5;
+      var buttonSize = parseInt(birdHeight) / 6;
       var size = buttonSize.toString() + "px";
       jQuery(".option-button").css("height", size);
+      jQuery(".option-button").css("margin", parseInt(buttonSize/10).toString() + 'px');
       done = true;
     }, 200);
 
